@@ -1,0 +1,28 @@
+{
+  "name": "demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "gen": "node src/index.js",
+    "dev": "live-server .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Liugq5713/demo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Liugq5713/demo/issues"
+  },
+  "homepage": "https://github.com/Liugq5713/demo#readme",
+  "devDependencies": {
+    "live-server": "1.2.1"
+  },
+  "dependencies": {
+    "handlebars": "^4.4.3"
+  }
+}

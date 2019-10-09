@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>IntersectionObserver 初步使用</title>
+    <style>
+      .block {
+        width: 800px;
+        height: 400px;
+        margin: 30px;
+        background-color: rgba(105, 94, 94, 0.479);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="block"></div>
+    <div class="block"></div>
+    <div class="block"></div>
+    <div class="block"></div>
+    <div class="block"></div>
+    <div class="block"></div>
+    <div class="block"></div>
+    <div class="block"></div>
+    <div class="block"></div>
+    <div class="block"></div>
+    <script>
+      const setShowBlock = function(entries) {
+        console.log("hi", { entries })
+      }
+      const el = new IntersectionObserver(setShowBlock)
+      let block = document.querySelector(".block")
+      el.observe(block)
+      console.log(el)
+    </script>
+  </body>
+</html>
