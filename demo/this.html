@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>this的指向问题</title>
+  </head>
+  <body>
+    <script>
+      console.log("this 指向执行时所在的上下文，即被调用函数所在的对象")
+
+      function test() {
+        console.log("普通函数调用的时候", this)
+      }
+      test()
+
+      const obj = {
+        foo() {
+          return function() {
+            console.log("对象里面的匿名函数", this)
+          }
+        }
+      }
+      fooo = obj.foo()
+      fooo()
+
+      // 构造函数的this，这里的this指向的就是创建的对象的实例
+
+      function Fn() {
+        this.user = "lgq"
+      }
+      var a = new Fn()
+      console.log(a.user)
+
+      // 但是如果你构造函数里面显式的返回了对象，那么this就指向的是返回的那个对象
+
+      function Boo() {
+        this.a = "a"
+        return { b: "b" }
+      }
+      const boo = new Boo()
+      console.log(boo.a, boo.b)
+    </script>
+  </body>
+</html>
