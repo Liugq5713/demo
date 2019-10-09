@@ -26,7 +26,7 @@ const template = (strings, pages) => {
     <body>
       <div id="list">
         <ul>
-          ${list}
+          ${list.join('\n')}
         </ul>
       </div>
     </body>
