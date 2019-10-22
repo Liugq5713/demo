@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>求两个子节点的公共父节点</title>
+  </head>
+  <body>
+    <div class="node">
+      <div id="a" class="node_child"></div>
+      <div id="b" class="node_child"></div>
+    </div>
+    <script>
+      function findCommonParent(a, b) {
+        console.log(a)
+        if (a.contains(b)) {
+          return a
+        }
+        if (b.contains(a)) {
+          return a
+        }
+        return findCommonParent(a.parentNode, b)
+      }
+      const a = document.getElementById("a")
+      const b = document.getElementById("b")
+      const res = findCommonParent(a, b)
+      console.log({ res })
+    </script>
+  </body>
+</html>
