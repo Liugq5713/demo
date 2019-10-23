@@ -14,5 +14,10 @@ var curry = function (fn) {
   };
 };
 
-add = curry(add_base, 1, 2, 3)
-console.log(add())
+var person = [{ name: 'kevin' }, { name: 'daisy' }]
+var prop = curry(function (key, obj) {
+  console.log({ key, obj })
+  return obj[key]
+});
+var name = person.map(prop('name'))
+console.log({ prop, name })
