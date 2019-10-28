@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>双向绑定</title>
+    <style>
+      .card {
+        width: 100px;
+        height: 100px;
+        background-color: rgb(182, 144, 144);
+      }
+    </style>
+  </head>
+  <body>
+    <label for="name">名称</label>
+    <input id="name" type="text" />
+
+    <div class="card" id="card1">ddd</div>
+    <div class="card" id="card2">ddd</div>
+
+    <script>
+      class Subscription {
+        constructor() {
+          this.eventMap = {}
+        }
+        // 订阅事件
+        // 需要判断事件是否已经订阅了，防止重复订阅
+        subscribe(event, subscriber) {
+          const arr = this.eventMap[event] || []
+          if (!arr.includes(subscriber)) {
+            arr.push(subscriber)
+          }
+          this.eventMap[event] = arr
+        }
+        // 发布事件
+        publish(event) {
+          if (this.eventMap[event].length > 0) {
+            for (const sub of this.eventMap[event]) {
+              sub.trigger()
+            }
+          }
+        }
+        remove(event, subscriber) {
+          const subs = this.eventMap[event]
+          const idx = subs.indexOf(subscriber)
+          if (idx > -1) {
+            subs.splice(idx, 1)
+          }
+        }
+      }
+      class Dom {
+        constructor(dom) {
+          this.dom = dom
+        }
+        trigger() {
+          this.dom.innerHTML = "Paragraph changed!"
+          console.log(this.dom, this.dom.innerHtml)
+        }
+      }
+      const subscription = new Subscription()
+      const el_name = new Dom(document.getElementById("name"))
+      const el_card1 = new Dom(document.getElementById("card1"))
+      const el_card2 = new Dom(document.getElementById("card2"))
+
+      subscription.subscribe("change", el_card1)
+      subscription.subscribe("change", el_card2)
+      document.getElementById("name").addEventListener("input", () => {
+        subscription.publish("change")
+      })
+    </script>
+  </body>
+</html>
