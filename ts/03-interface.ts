@@ -77,10 +77,54 @@ let helloWoman: PersonFunc = function(tickname: "ju", age: 0) {
 
 // ===
 // 索引类型
-
+// 支持两种数据形式，string 和 number
+// 但是number索引返回的类型必须是string类型的子类型， 因为js的对象的key为字符串
 interface StringArray {
   [index: number]: string
 }
 
 let stringArray: StringArray
 stringArray = ["e", "e"]
+
+// 索引类型 强制其所有的属性符合索引类型的返回值
+interface NumberOrStringDictionary {
+  [index: string]: number | string
+  length: number // ok, length is a number
+  name: string // ok, name is a string
+}
+
+// ====
+// 类也可以使用接口，类的声明分为两种，静态和实例,但是类接口仅仅验证其实例的方法
+// 声明类的属性，和方法
+interface MyClass {
+  now: Date
+  setTime(d: Date): void
+  new (hour: number, minute: number)
+}
+
+class Clock implements MyClass {
+  now: Date = new Date()
+  d: string = "s"
+  setTime(d: Date) {
+    this.now = d
+  }
+  constructor(h: number, m: number): void {}
+}
+
+// ====
+// 接口的继承，可以一下子继承多个
+
+interface Shape {
+  color: string
+}
+
+interface PenStroke {
+  penWidth: number
+}
+
+interface Square extends Shape, PenStroke {
+  sideLength: number
+}
+
+// 接口也可以继承类
+// todo
